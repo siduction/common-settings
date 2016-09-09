@@ -61,11 +61,7 @@ sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
 [ -d sbin ] && rm -r sbin
 [ -d usr ] && rm -r usr
 
-cp -a templates/common .
-
-# debian settings common
-# ======================
-
+cp -a templates/* .
 
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
     -e "s/\@DISPLAY\@/${DISPLAY}/g" \
