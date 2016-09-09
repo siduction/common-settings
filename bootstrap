@@ -27,38 +27,41 @@ chmod 755 ./debian/get-template
 
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
     -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    ./debtemplate/common-livesettings.install \
+    ./debtemplate/livesettings.install \
     > ./debian/${CODENAME_SAFE}-common-livesettings.install
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
     -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    ./debtemplate/common-livesettings.lintian-overrides \
+    ./debtemplate/livesettings.lintian-overrides \
     > ./debian/${CODENAME_SAFE}-common-livesettings.lintian-overrides
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
     -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    ./debtemplate/common-livesettings.postinst \
+    ./debtemplate/livesettings.postinst \
     > ./debian/${CODENAME_SAFE}-common-livesettings.postinst
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
     -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    ./debtemplate/common-livesettings.preinst \
+    ./debtemplate/livesettings.preinst \
     > ./debian/${CODENAME_SAFE}-common-livesettings.preinst
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
     -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    ./debtemplate/common-livesettings.service \
+    ./debtemplate/livesettings.service \
     > ./debian/${CODENAME_SAFE}-common-livesettings.service
 
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
     -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    ./debtemplate/common-settings.install \
+    ./debtemplate/settings.install \
     > ./debian/${CODENAME_SAFE}-common-settings.install
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
     -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    ./debtemplate/common-settings.postinst \
+    ./debtemplate/settings.postinst \
     > ./debian/${CODENAME_SAFE}-common-settings.postinst
 
 ## template
-## fix me
-## [ -d common ] && rm -r common
-## cp -a templates/common .
+[ -d etc ] && rm -r etc
+[ -d live ] && rm -r live
+[ -d sbin ] && rm -r sbin
+[ -d usr ] && rm -r usr
+
+cp -a templates/common .
 
 # debian settings common
 # ======================
@@ -66,16 +69,16 @@ sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
 
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
     -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    template/common/livesettings \
-    > common/livesettings
+    ./template/livesettings \
+    > ./livesettings
 sed -e "s/\@FLL_LIVE_USER\@/${FLL_LIVE_USER}/g" \
     -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    template/common/live/etc/polkit-1/localauthority/10-vendor.d/10-live-cd.pkla \
-    > common/live/etc/polkit-1/localauthority/10-vendor.d/10-live-cd.pkla
+    ./template/live/etc/polkit-1/localauthority/10-vendor.d/10-live-cd.pkla \
+    > ./live/etc/polkit-1/localauthority/10-vendor.d/10-live-cd.pkla
 sed -e "s/\@FLL_LIVE_USER\@/${FLL_LIVE_USER}/g" \
     -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    templates/common/live/etc/systemd/system/getty@tty1.service \
-    > common/live/etc/systemd/system/getty@tty1.service
+    template/live/etc/systemd/system/getty@tty1.service \
+    > live/etc/systemd/system/getty@tty1.service
 
 
 exit 0
