@@ -1,2 +1,2 @@
-common/etc     usr/share/paintitblack-common-settings
-common/usr/*   usr/   
+etc     usr/share/paintitblack-common-settings/
+usr/*   usr/   
