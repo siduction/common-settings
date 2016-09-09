@@ -2,7 +2,7 @@
 set -e
 
 
-. templates/functions.sh
+source ./functions.sh
 
 source_version_info
 debian_changelog
@@ -12,49 +12,65 @@ debian_foo_basics
 basic_control common
 debian_rules
 
-# debian live settings common
-# ===========================
-[ -d common ] && rm -r common
-cp -a templates/common .
+# debian
+
+sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
+    -e "s/\@FLAVOUR\@/${FLAVOUR}/g" \
+    ./debtemplate/copyright \
+    > ./debian/copyright
 
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
     -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    templates/debian/common-livesettings.install \
-    > debian/${CODENAME_SAFE}-common-livesettings.install
+    ./debtemplate/get-template \
+    > ./debian/get-template
+chmod 755 ./debian/get-template
+
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
     -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    templates/debian/common-livesettings.lintian-overrides \
-    > debian/${CODENAME_SAFE}-common-livesettings.lintian-overrides
+    ./debtemplate/common-livesettings.install \
+    > ./debian/${CODENAME_SAFE}-common-livesettings.install
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
     -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    templates/debian/common-livesettings.postinst \
-    > debian/${CODENAME_SAFE}-common-livesettings.postinst
+    ./debtemplate/common-livesettings.lintian-overrides \
+    > ./debian/${CODENAME_SAFE}-common-livesettings.lintian-overrides
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
     -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    templates/debian/common-livesettings.preinst \
-    > debian/${CODENAME_SAFE}-common-livesettings.preinst
+    ./debtemplate/common-livesettings.postinst \
+    > ./debian/${CODENAME_SAFE}-common-livesettings.postinst
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
     -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    templates/debian/common-livesettings.service \
-    > debian/${CODENAME_SAFE}-common-livesettings.service
+    ./debtemplate/common-livesettings.preinst \
+    > ./debian/${CODENAME_SAFE}-common-livesettings.preinst
+sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
+    -e "s/\@DISPLAY\@/${DISPLAY}/g" \
+    ./debtemplate/common-livesettings.service \
+    > ./debian/${CODENAME_SAFE}-common-livesettings.service
+
+sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
+    -e "s/\@DISPLAY\@/${DISPLAY}/g" \
+    ./debtemplate/common-settings.install \
+    > ./debian/${CODENAME_SAFE}-common-settings.install
+sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
+    -e "s/\@DISPLAY\@/${DISPLAY}/g" \
+    ./debtemplate/common-settings.postinst \
+    > ./debian/${CODENAME_SAFE}-common-settings.postinst
+
+## template
+## fix me
+## [ -d common ] && rm -r common
+## cp -a templates/common .
 
 # debian settings common
 # ======================
+
+
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
     -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    templates/debian/common-settings.install \
-    > debian/${CODENAME_SAFE}-common-settings.install
-sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
-    -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    templates/debian/common-settings.postinst \
-    > debian/${CODENAME_SAFE}-common-settings.postinst
-sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
-    -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    templates/common/livesettings \
+    template/common/livesettings \
     > common/livesettings
 sed -e "s/\@FLL_LIVE_USER\@/${FLL_LIVE_USER}/g" \
     -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    templates/common/live/etc/polkit-1/localauthority/10-vendor.d/10-live-cd.pkla \
+    template/common/live/etc/polkit-1/localauthority/10-vendor.d/10-live-cd.pkla \
     > common/live/etc/polkit-1/localauthority/10-vendor.d/10-live-cd.pkla
 sed -e "s/\@FLL_LIVE_USER\@/${FLL_LIVE_USER}/g" \
     -e "s/\@DISPLAY\@/${DISPLAY}/g" \
