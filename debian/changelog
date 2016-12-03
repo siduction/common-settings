@@ -1,3 +1,10 @@
+patience-common-settings (2016.1.0~alpha-2) unstable; urgency=medium
+
+  * refs #1 copy .bashrc to /root
+  * drop xdg gtk settings 
+
+ -- Alf Gaida <agaida@siduction.org>  Sun, 04 Dec 2016 00:09:44 +0100
+
 patience-common-settings (2016.1.0~alpha-1) unstable; urgency=medium
 
   * Initial Release.
