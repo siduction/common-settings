@@ -1,3 +1,9 @@
+paintitblack-common-settings (2016.12.04) unstable; urgency=medium
+
+  * drop xdg gtk settings 
+
+ -- Alf Gaida <agaida@siduction.org>  Sun, 04 Dec 2016 00:00:50 +0100
+
 paintitblack-common-settings (2016.12.03) unstable; urgency=medium
 
   * fixes #1 copy bashrc to root
