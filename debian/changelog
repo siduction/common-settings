@@ -1,3 +1,9 @@
+paintitblack-common-settings (2016.12.03) unstable; urgency=medium
+
+  * fixes #1 copy bashrc to root
+
+ -- Alf Gaida <agaida@siduction.org>  Sat, 03 Dec 2016 23:41:40 +0100
+
 paintitblack-common-settings (2016.08.03) unstable; urgency=medium
 
   * new bootstrap
