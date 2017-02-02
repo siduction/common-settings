@@ -64,10 +64,6 @@ chown_user_dir() {
     chown -R ${FLL_LIVE_USER} /home/${FLL_LIVE_USER}
 }
 
-copy_bashrc() {
-    cp -f /home/${FLL_LIVE_USER}/.bashrc /root/
-}
-
 
 case "$1" in
     configure)
@@ -94,7 +90,6 @@ case "$1" in
     hack_bashrc
     user_home_common_settings
     chown_user_dir
-    copy_bashrc
     ;;
     *)
         echo "livesettings  called with unknown argument \`$1'" >&2
