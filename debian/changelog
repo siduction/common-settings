@@ -1,3 +1,9 @@
+patience-common-settings (2016.1.0-4) unstable; urgency=medium
+
+  * Added siduction libinput.conf, closes #2 
+
+ -- Alf Gaida <agaida@siduction.org>  Sun, 12 Feb 2017 19:44:04 +0100
+
 patience-common-settings (2016.1.0-3) unstable; urgency=medium
 
   * removed copy bashrc from live-settings, we do this a little bit more
