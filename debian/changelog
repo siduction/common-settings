@@ -1,3 +1,10 @@
+patience-common-settings (2016.1.0-5) unstable; urgency=medium
+
+  * Put a link to Calamares on the desktop, setup_calamares replaces
+    setup_sidu_installer - now realized via templates
+
+ -- Alf Gaida <agaida@siduction.org>  Mon, 13 Feb 2017 16:50:02 +0100
+
 patience-common-settings (2016.1.0-4) unstable; urgency=medium
 
   * Added siduction libinput.conf, closes #2 
