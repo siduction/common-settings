@@ -1,3 +1,9 @@
+patience-common-settings (2016.1.0-9) unstable; urgency=medium
+
+  * force_color_prompt=yes
+
+ -- Alf Gaida <agaida@siduction.org>  Tue, 14 Feb 2017 21:57:04 +0100
+
 patience-common-settings (2016.1.0-8) unstable; urgency=medium
 
   * red prompt for admin account  
