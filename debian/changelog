@@ -1,3 +1,9 @@
+patience-common-settings (2016.1.0-7) unstable; urgency=medium
+
+  * red prompt for admin account  
+
+ -- Alf Gaida <agaida@siduction.org>  Tue, 14 Feb 2017 18:33:34 +0100
+
 patience-common-settings (2016.1.0-5) unstable; urgency=medium
 
   * Put a link to Calamares on the desktop, setup_calamares replaces
