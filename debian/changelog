@@ -1,3 +1,10 @@
+patience-common-settings (2016.1.0-11) unstable; urgency=medium
+
+  * removed some typos
+  * some refinements
+
+ -- Alf Gaida <agaida@siduction.org>  Wed, 15 Feb 2017 00:48:43 +0100
+
 patience-common-settings (2016.1.0-10) unstable; urgency=medium
 
   * make bash more powerful, esp for root 
