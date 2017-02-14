@@ -1,3 +1,9 @@
+patience-common-settings (2016.1.0-10) unstable; urgency=medium
+
+  * make bash more powerful, esp for root 
+
+ -- Alf Gaida <agaida@siduction.org>  Wed, 15 Feb 2017 00:13:25 +0100
+
 patience-common-settings (2016.1.0-9) unstable; urgency=medium
 
   * force_color_prompt=yes
