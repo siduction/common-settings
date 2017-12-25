@@ -4,9 +4,9 @@ Priority: optional
 Maintainer: Alf Gaida <agaida@siduction.org>
 Uploaders: Torsten Wohlfarth <towo@siduction.org>,
            Ovidiu Angelescu <convbsd@siduction.net>
-Build-Depends: debhelper (>= 9),
+Build-Depends: debhelper (>= 10),
                dh-systemd
-Standards-Version: 3.9.8
+Standards-Version: 4.1.2
 Homepage: https://git.siduction.org/extra/siduction-common
 Vcs-Git: https://git.siduction.org/extra/siduction-common.git
 Vcs-Browser: https://git.siduction.org/extra/siduction-common.git
@@ -15,6 +15,9 @@ Vcs-Browser: https://git.siduction.org/extra/siduction-common.git
 Package: patience-common-settings
 Architecture: all
 Depends: ${misc:Depends},
+         gnome-icon-theme,
+         gnome-icon-theme-symbolic,
+         patience-grub-theme,
          dconf-cli
 Breaks: siduction-settings-plank
 Replaces: siduction-settings-plank

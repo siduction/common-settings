@@ -1,3 +1,11 @@
+patience-common-settings (2017.2.0-1) unstable; urgency=medium
+
+  * Bump Standards and compat
+  * fix some dependencies - we have extended apt states in installation
+    now
+
+ -- Alf Gaida <agaida@siduction.org>  Mon, 25 Dec 2017 13:19:52 +0100
+
 patience-common-settings (2017.1.0-1) unstable; urgency=medium
 
   * release branding
