@@ -2,11 +2,3 @@
 *~
 *.save
 
-## ignored package stuff
-/*/*.build
-/*/*.changes
-/*/*.deb
-/*/*.dsc
-/*/*.tar.xz
-/*/*.tar.bz2
-/*/*.upload
