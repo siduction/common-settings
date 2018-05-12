@@ -8,22 +8,14 @@ function source_version_info {
         echo "No VERSION-File, exit!"
         exit 1
     fi
-
-    if [ -f FLAVOUR ]; then
-        . ./FLAVOUR
-    else
-        echo "No FLAVOUR-File, exit!"
-        exit 1
-    fi
-
 }
 
 
 # eventually cleanup old builds
 function cleanup_old_builds {
     if [ -f ./debian/rules ]; then
-        debuild -- -d clean
-        rm debian/rules
+        debclean -d
+        rm ./debian/rules
         echo "old builds cleaned up, run bootstrap again!"
         return 1
     fi
@@ -33,31 +25,30 @@ function cleanup_old_builds {
 # debian cleanup
 # ==============
 function debian_cleanup {
-    rm -vrf debian/siduction-live-settings-*-*
-    rm -vrf debian/siduction-settings-*-*
-    rm -vf debian/files
-    rm -vf debian/*.init
-    rm -vf debian/*.install
-    rm -vf debian/*.lintian-overrides
-    rm -vf debian/*.log
-    rm -vf debian/*.postinst
-    rm -vf debian/*.preinst
-    rm -vf debian/*.postrm
-    rm -vf debian/*.service
+    rm -vrf ./debian/siduction-live-settings-*-*
+    rm -vrf ./debian/siduction-settings-*-*
+    rm -vf ./debian/files
+    rm -vf ./debian/*.init
+    rm -vf ./debian/*.install
+    rm -vf ./debian/*.lintian-overrides
+    rm -vf ./debian/*.log
+    rm -vf ./debian/*.postinst
+    rm -vf ./debian/*.preinst
+    rm -vf ./debian/*.postrm
+    rm -vf ./debian/*.service
 }
 
 
 # debian changelog
 # ================
 function debian_changelog {
-    if [ ! -f debian/changelog ]; then
+    if [ ! -f ./debian/changelog ]; then
         sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
+            -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
             -e "s/\@DISTRIBUTION\@/${DISTRIBUTION}/g" \
             -e "s/\@VERSION\@/${VERSION}/g" \
-            -e "s/\@FLAVOUR\@/${FLAVOUR}/g" \
-            -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-            ./debtemplate/changelog \
-            > debian/changelog
+            ../template/debian/changelog \
+            > ./debian/changelog
     fi
 }
 
@@ -66,11 +57,10 @@ function debian_changelog {
 # =============
 function basic_control {
     sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
+        -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
         -e "s/\@DISTRIBUTION\@/${DISTRIBUTION}/g" \
         -e "s/\@VERSION\@/${VERSION}/g" \
-        -e "s/\@FLAVOUR\@/${FLAVOUR}/g" \
-        -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-        ./debtemplate/control \
+        ../template/debian/control \
         > ./debian/control
 }
 
@@ -80,11 +70,10 @@ function basic_control {
 function grub_template {
     mkdir -p ./etc/default/grub.d
     sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
+        -e "s/\@CODENAME\@/${CODENAME}/g" \
         -e "s/\@DISTRIBUTION\@/${DISTRIBUTION}/g" \
         -e "s/\@VERSION\@/${VERSION}/g" \
-        -e "s/\@FLAVOUR\@/${1}/g" \
-        -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-        ./template/etc/default/grub.d/siduction.cfg \
+        ../template/etc/default/grub.d/siduction.cfg \
         > ./etc/default/grub.d/siduction.cfg
 }
 
@@ -93,11 +82,10 @@ function grub_template {
 # ============
 function debian_rules {
     sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
+        -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
         -e "s/\@DISTRIBUTION\@/${DISTRIBUTION}/g" \
         -e "s/\@VERSION\@/${VERSION}/g" \
-        -e "s/\@FLAVOUR\@/${FLAVOUR}/g" \
-        -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-        ./debtemplate/rules \
+        ../template/debian/rules \
         > ./debian/rules
     chmod 755 debian/rules
 }
@@ -107,6 +95,6 @@ function debian_rules {
 # =================
 function debian_foo_basics {
     mkdir -p ./debian/source
-    echo 1.0 > ./debian/source/format
-    echo 9   > ./debian/compat
+    cp -av ../template/debian/source/format ./debian/source/
+    cp -av ../template/debian/compat ./debian/
 }

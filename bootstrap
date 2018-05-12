@@ -2,7 +2,7 @@
 set -e
 
 
-source ./functions.sh
+[ -e ../template/zfunctions.sh ] && source ../template/zfunctions.sh
 
 source_version_info
 debian_changelog
@@ -15,44 +15,42 @@ debian_rules
 # debian
 
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
-    -e "s/\@FLAVOUR\@/${FLAVOUR}/g" \
-    ./debtemplate/copyright \
+    ../template/debian/copyright \
     > ./debian/copyright
 
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
-    -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    ./debtemplate/get-template \
-    > ./debian/get-template
-chmod 755 ./debian/get-template
+    -e "s/\@CODENAME\@/${CODENAME}/g" \
+    ../template/debian/${CODENAME_SAFE}-common-livesettings.install \
+    > ./debian/${CODENAME_SAFE}-common-livesettings.install
 
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
-    -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    ./debtemplate/livesettings.install \
-    > ./debian/${CODENAME_SAFE}-common-livesettings.install
-sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
-    -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    ./debtemplate/livesettings.lintian-overrides \
+    -e "s/\@CODENAME\@/${CODENAME}/g" \
+    ../template/debian/${CODENAME_SAFE}-common-livesettings.lintian-overrides \
     > ./debian/${CODENAME_SAFE}-common-livesettings.lintian-overrides
+
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
-    -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    ./debtemplate/livesettings.postinst \
+    -e "s/\@CODENAME\@/${CODENAME}/g" \
+    ../template/debian/${CODENAME_SAFE}-common-livesettings.postinst \
     > ./debian/${CODENAME_SAFE}-common-livesettings.postinst
+
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
-    -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    ./debtemplate/livesettings.preinst \
+    -e "s/\@CODENAME\@/${CODENAME}/g" \
+    ../template/debian/${CODENAME_SAFE}-common-livesettings.preinst \
     > ./debian/${CODENAME_SAFE}-common-livesettings.preinst
+
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
-    -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    ./debtemplate/livesettings.service \
+    -e "s/\@CODENAME\@/${CODENAME}/g" \
+    ../template/debian/${CODENAME_SAFE}-common-livesettings.service \
     > ./debian/${CODENAME_SAFE}-common-livesettings.service
 
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
-    -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    ./debtemplate/settings.install \
+    -e "s/\@CODENAME\@/${CODENAME}/g" \
+    ../template/debian/${CODENAME_SAFE}-common-settings.install \
     > ./debian/${CODENAME_SAFE}-common-settings.install
+
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
-    -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    ./debtemplate/settings.postinst \
+    -e "s/\@CODENAME\@/${CODENAME}/g" \
+    ../template/debian/${CODENAME_SAFE}-common-settings.postinst \
     > ./debian/${CODENAME_SAFE}-common-settings.postinst
 
 ## template
@@ -61,19 +59,22 @@ sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
 [ -d sbin ] && rm -r sbin
 [ -d usr ] && rm -r usr
 
-cp -a template/* .
+cp -a ../template/etc .
+cp -a ../template/live .
+cp -a ../template/sbin .
+cp -a ../template/usr .
 
 sed -e "s/\@CODENAME_SAFE\@/${CODENAME_SAFE}/g" \
-    -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    ./template/livesettings \
+    -e "s/\@CODENAME\@/${CODENAME}/g" \
+    ../template/livesettings \
     > ./livesettings
 sed -e "s/\@FLL_LIVE_USER\@/${FLL_LIVE_USER}/g" \
-    -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    ./template/live/etc/polkit-1/localauthority/10-vendor.d/10-live-cd.pkla \
+    -e "s/\@CODENAME\@/${CODENAME}/g" \
+    ../template/live/etc/polkit-1/localauthority/10-vendor.d/10-live-cd.pkla \
     > ./live/etc/polkit-1/localauthority/10-vendor.d/10-live-cd.pkla
 sed -e "s/\@FLL_LIVE_USER\@/${FLL_LIVE_USER}/g" \
-    -e "s/\@DISPLAY\@/${DISPLAY}/g" \
-    template/live/etc/systemd/system/getty@tty1.service \
+    -e "s/\@CODENAME\@/${CODENAME}/g" \
+    ../template/live/etc/systemd/system/getty@tty1.service \
     > live/etc/systemd/system/getty@tty1.service
 
 
