@@ -1,3 +1,10 @@
+patience-common-settings (2018.3.0-2) unstable; urgency=medium
+
+  * fixed profile.d snippets - removed bash-completion.sh, upstream
+    change
+
+ -- Alf Gaida <agaida@siduction.org>  Sun, 09 Sep 2018 14:43:22 +0200
+
 patience-common-settings (2018.3.0-1) unstable; urgency=medium
 
   * new release 18.3
