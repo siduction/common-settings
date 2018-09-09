@@ -1,6 +1,25 @@
+paintitblack-common-settings (2018.4.0~2) unstable; urgency=medium
+
+  * fixed some scripts to run only in bash
+  * dropped the bash-completion script - works now out of the box
+
+ -- Alf Gaida <agaida@siduction.org>  Sat, 08 Sep 2018 02:28:25 +0200
+
+paintitblack-common-settings (2018.4.0~1) unstable; urgency=medium
+
+  * bootstrap for 2018.4.0~
+
+ -- Alf Gaida <agaida@siduction.org>  Sat, 26 May 2018 15:31:57 +0200
+
+paintitblack-common-settings (2018.3.0-1) unstable; urgency=medium
+
+  * bootstrap for 2018.3.0
+
+ -- Alf Gaida <agaida@siduction.org>  Sun, 15 Apr 2018 20:12:54 +0200
+
 paintitblack-common-settings (2016.12.04) unstable; urgency=medium
 
-  * drop xdg gtk settings 
+  * drop xdg gtk settings
 
  -- Alf Gaida <agaida@siduction.org>  Sun, 04 Dec 2016 00:00:50 +0100
 
@@ -36,7 +55,7 @@ paintitblack-common-settings (2016.04.04) unstable; urgency=medium
 
 paintitblack-common-settings (2016.04.03) unstable; urgency=medium
 
-  * provide siduction plank theme 
+  * provide siduction plank theme
 
  -- Alf Gaida <agaida@siduction.org>  Sun, 03 Apr 2016 18:46:05 +0200
 
@@ -48,7 +67,7 @@ paintitblack-common-settings (2016.03.30) unstable; urgency=medium
 
 paintitblack-common-settings (2016.03.29) unstable; urgency=medium
 
-  * another fix for .inputrc 
+  * another fix for .inputrc
 
  -- Alf Gaida <agaida@siduction.org>  Mon, 28 Mar 2016 00:27:40 +0200
 
@@ -72,7 +91,7 @@ paintitblack-common-settings (2016.03.25) unstable; urgency=medium
 
 paintitblack-common-settings (2016.03.24) unstable; urgency=medium
 
-  * kill the weasel 
+  * kill the weasel
 
  -- Alf Gaida <agaida@siduction.org>  Thu, 24 Mar 2016 20:00:12 +0100
 
@@ -84,7 +103,7 @@ paintitblack-common-settings (2016.01.22) unstable; urgency=medium
 
 paintitblack-common-settings (2015.12.07) unstable; urgency=medium
 
-  * new bootstrap 
+  * new bootstrap
 
  -- Alf Gaida <agaida@siduction.org>  Tue, 08 Dec 2015 00:19:40 +0100
 

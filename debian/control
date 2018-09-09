@@ -4,21 +4,22 @@ Priority: optional
 Maintainer: Alf Gaida <agaida@siduction.org>
 Uploaders: Torsten Wohlfarth <towo@siduction.org>,
            Ovidiu Angelescu <convbsd@siduction.net>
-Build-Depends: debhelper (>= 9),
-               dh-systemd
-Standards-Version: 3.9.8
-Homepage: https://git.siduction.org/extra/siduction-common
-Vcs-Git: https://git.siduction.org/extra/siduction-common.git
-Vcs-Browser: https://git.siduction.org/extra/siduction-common.git
+Build-Depends: debhelper (>= 11)
+Standards-Version: 4.1.4
+Vcs-Browser: https://git.siduction.org/extra/common-settings
+Vcs-Git: https://git.siduction.org/extra/common-settings.git
+Homepage: https://git.siduction.org/extra/common-settings
 
-# common Settings
 Package: paintitblack-common-settings
 Architecture: all
 Depends: ${misc:Depends},
+         gnome-icon-theme,
+         gnome-icon-theme-symbolic,
+         paintitblack-grub-theme,
          dconf-cli
 Breaks: siduction-settings-plank
 Replaces: siduction-settings-plank
-Description: Common settings in installed mode
+Description: Common settings (installed mode)
  Some Common settings for the installed mode:
    * Trolltech.conf
    * gtk-2.0
@@ -34,5 +35,5 @@ Depends: ${misc:Depends},
          gnome-icon-theme-symbolic,
          paintitblack-live-grub-theme,
          paintitblack-common-settings
-Description: Common settings in live mode
- Pushes Common overrides schemas in live mode
+Description: Common settings (live mode)
+ Common settings for live mode.

@@ -51,21 +51,17 @@ hack_bashrc() {
     chown ${FLL_LIVE_USER} /home/${FLL_LIVE_USER}/.bashrc
 }
 
-setup_sidu_installer() {
+setup_calamares() {
     mkdir -p /home/${FLL_LIVE_USER}/Desktop
-    if [ -e /usr/share/applications/sidu-installer.desktop ]; then
-        cp -f /usr/share/applications/sidu-installer.desktop /home/${FLL_LIVE_USER}/Desktop
-        chmod +x /home/${FLL_LIVE_USER}/Desktop/sidu-installer.desktop
+    if [ -e /usr/share/applications/calamares.desktop ]; then
+        cp -f /usr/share/applications/calamares.desktop /home/${FLL_LIVE_USER}/Desktop
+        chmod +x /home/${FLL_LIVE_USER}/Desktop/calamares.desktop
     fi
 }
 
 chown_user_dir() {
     # central point setting the ownership of users home
     chown -R ${FLL_LIVE_USER} /home/${FLL_LIVE_USER}
-}
-
-copy_bashrc() {
-    cp -f /home/${FLL_LIVE_USER}/.bashrc /root/
 }
 
 
@@ -90,11 +86,10 @@ case "$1" in
     fi
     gen_adduser_conf
     add_live_user
-    setup_sidu_installer
+    setup_calamares
     hack_bashrc
     user_home_common_settings
     chown_user_dir
-    copy_bashrc
     ;;
     *)
         echo "livesettings  called with unknown argument \`$1'" >&2
