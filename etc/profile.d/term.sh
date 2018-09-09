@@ -1,5 +1,3 @@
-#/bin/bash
-
 TERMINAL=$(ps | grep $$ | awk '{ print $2 }' | uniq 2>/dev/null)
 
 case ${TERMINAL} in
@@ -10,4 +8,3 @@ case ${TERMINAL} in
         export TERM=linux
         ;;
 esac
-
