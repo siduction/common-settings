@@ -1,7 +1,0 @@
-sbin/*              sbin/
-livesettings        usr/bin/
-user-home-settings  usr/share/paintitblack-common-livesettings
-all-users-settings  usr/share/paintitblack-common-livesettings
-common-cheatcodes   usr/share/paintitblack-common-livesettings
-live/etc/*          etc/
-

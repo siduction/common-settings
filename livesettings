@@ -9,8 +9,8 @@ fi
 
 all_users_common_settings() {
     # we run all users settings
-    if [ -f /usr/share/paintitblack-common-livesettings/all-users-settings ] ;then
-        /usr/share/paintitblack-common-livesettings/all-users-settings
+    if [ -f /usr/share/xperimental-common-livesettings/all-users-settings ] ;then
+        /usr/share/xperimental-common-livesettings/all-users-settings
     fi
 }
 
@@ -38,15 +38,15 @@ EOF
 }
 
 user_home_common_settings() {
-    if [ -f /usr/share/paintitblack-common-livesettings/user-home-settings ] ;then
-        su "${FLL_LIVE_USER}" -c /usr/share/paintitblack-common-livesettings/user-home-settings
+    if [ -f /usr/share/xperimental-common-livesettings/user-home-settings ] ;then
+        su "${FLL_LIVE_USER}" -c /usr/share/xperimental-common-livesettings/user-home-settings
     fi
 }
 
 
 hack_bashrc() {
     grep -s -q 'alias su' /home/${FLL_LIVE_USER}/.bashrc && return 0
-    printf "\nalias su='sudo su'\n" \
+    printf "\nalias su='sudo su -'\n" \
         >> /home/${FLL_LIVE_USER}/.bashrc
     chown ${FLL_LIVE_USER} /home/${FLL_LIVE_USER}/.bashrc
 }
