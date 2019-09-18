@@ -46,7 +46,7 @@ user_home_common_settings() {
 
 hack_bashrc() {
     grep -s -q 'alias su' /home/${FLL_LIVE_USER}/.bashrc && return 0
-    printf "\nalias su='sudo su'\n" \
+    printf "\nalias su='sudo su -'\n" \
         >> /home/${FLL_LIVE_USER}/.bashrc
     chown ${FLL_LIVE_USER} /home/${FLL_LIVE_USER}/.bashrc
 }
