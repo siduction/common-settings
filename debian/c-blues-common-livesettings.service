@@ -1,0 +1,11 @@
+[Unit]
+Description=Common cheatcodes in live media
+ConditionPathExists=/usr/share/c-blues-common-livesettings/
+After=sysinit.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/share/c-blues-common-livesettings/common-cheatcodes start
+
+[Install]
+WantedBy=basic.target

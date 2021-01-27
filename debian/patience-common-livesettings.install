@@ -1,7 +1,0 @@
-sbin/*              sbin/
-livesettings        usr/bin/
-user-home-settings  usr/share/patience-common-livesettings
-all-users-settings  usr/share/patience-common-livesettings
-common-cheatcodes   usr/share/patience-common-livesettings
-live/etc/*          etc/
-

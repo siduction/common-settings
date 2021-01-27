@@ -1,4 +1,4 @@
-Source: patience-common-settings
+Source: c-blues-common-settings
 Section: misc
 Priority: optional
 Maintainer: Alf Gaida <agaida@siduction.org>
@@ -10,12 +10,12 @@ Vcs-Browser: https://git.siduction.org/extra/common-settings
 Vcs-Git: https://git.siduction.org/extra/common-settings.git
 Homepage: https://git.siduction.org/extra/common-settings
 
-Package: patience-common-settings
+Package: c-blues-common-settings
 Architecture: all
 Depends: ${misc:Depends},
          gnome-icon-theme,
          gnome-icon-theme-symbolic,
-         patience-grub-theme,
+         c-blues-grub-theme,
          dconf-cli
 Breaks: siduction-settings-plank
 Replaces: siduction-settings-plank
@@ -25,7 +25,7 @@ Description: Common settings (installed mode)
    * gtk-2.0
    * gtk-3.0
 
-Package: patience-common-livesettings
+Package: c-blues-common-livesettings
 Architecture: all
 Depends: ${misc:Depends},
          adduser,
@@ -33,7 +33,7 @@ Depends: ${misc:Depends},
          libglib2.0-bin,
          gnome-icon-theme,
          gnome-icon-theme-symbolic,
-         patience-live-grub-theme,
-         patience-common-settings
+         c-blues-live-grub-theme,
+         c-blues-common-settings
 Description: Common settings (live mode)
  Common settings for live mode.
