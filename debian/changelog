@@ -1,8 +1,12 @@
-c-blues-common-settings (2021.1.0) UNRELEASED; urgency=medium
+c-blues-common-settings (2021.1.0) unstable; urgency=medium
 
+  [ Hendrik Lehmbruch ]
   * preparing 21.1 release c-blues
 
- -- Hendrik Lehmbruch <hendrikl@siduction.org>  Wed, 27 Jan 2021 18:51:21 +0100
+  [ Torsten Wohlfarth ]
+  * build and upload for release of c-blues
+
+ -- Torsten Wohlfarth <towo@siduction.org>  Sat, 30 Jan 2021 16:37:26 +0100
 
 patience-common-settings (2018.3.0-2) unstable; urgency=medium
 
