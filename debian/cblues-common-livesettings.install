@@ -1,0 +1,7 @@
+sbin/*              sbin/
+livesettings        usr/bin/
+user-home-settings  usr/share/cblues-common-livesettings
+all-users-settings  usr/share/cblues-common-livesettings
+common-cheatcodes   usr/share/cblues-common-livesettings
+live/etc/*          etc/
+
