@@ -1,0 +1,7 @@
+sbin/*              sbin/
+livesettings        usr/bin/
+user-home-settings  usr/share/farewell-common-livesettings
+all-users-settings  usr/share/farewell-common-livesettings
+common-cheatcodes   usr/share/farewell-common-livesettings
+live/etc/*          etc/
+
