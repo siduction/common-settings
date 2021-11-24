@@ -1,4 +1,4 @@
-Source: cblues-common-settings
+Source: wintersky-common-settings
 Section: misc
 Priority: optional
 Maintainer: Alf Gaida <agaida@siduction.org>
@@ -10,12 +10,12 @@ Vcs-Browser: https://git.siduction.org/extra/common-settings
 Vcs-Git: https://git.siduction.org/extra/common-settings.git
 Homepage: https://git.siduction.org/extra/common-settings
 
-Package: cblues-common-settings
+Package: wintersky-common-settings
 Architecture: all
 Depends: ${misc:Depends},
          gnome-icon-theme,
          gnome-icon-theme-symbolic,
-         cblues-grub-theme,
+         wintersky-grub-theme,
          dconf-cli
 Breaks: siduction-settings-plank
 Replaces: siduction-settings-plank
@@ -25,7 +25,7 @@ Description: Common settings (installed mode)
    * gtk-2.0
    * gtk-3.0
 
-Package: cblues-common-livesettings
+Package: wintersky-common-livesettings
 Architecture: all
 Depends: ${misc:Depends},
          adduser,
@@ -33,7 +33,7 @@ Depends: ${misc:Depends},
          libglib2.0-bin,
          gnome-icon-theme,
          gnome-icon-theme-symbolic,
-         cblues-live-grub-theme,
-         cblues-common-settings
+         wintersky-live-grub-theme,
+         wintersky-common-settings
 Description: Common settings (live mode)
  Common settings for live mode.

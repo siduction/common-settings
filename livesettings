@@ -9,8 +9,8 @@ fi
 
 all_users_common_settings() {
     # we run all users settings
-    if [ -f /usr/share/c-blues-common-livesettings/all-users-settings ] ;then
-        /usr/share/c-blues-common-livesettings/all-users-settings
+    if [ -f /usr/share/wintersky-common-livesettings/all-users-settings ] ;then
+        /usr/share/wintersky-common-livesettings/all-users-settings
     fi
 }
 
@@ -38,8 +38,8 @@ EOF
 }
 
 user_home_common_settings() {
-    if [ -f /usr/share/c-blues-common-livesettings/user-home-settings ] ;then
-        su "${FLL_LIVE_USER}" -c /usr/share/c-blues-common-livesettings/user-home-settings
+    if [ -f /usr/share/wintersky-common-livesettings/user-home-settings ] ;then
+        su "${FLL_LIVE_USER}" -c /usr/share/wintersky-common-livesettings/user-home-settings
     fi
 }
 
