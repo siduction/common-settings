@@ -1,3 +1,15 @@
+wintersky-common-settings (2021.2.99-5) unstable; urgency=medium
+
+  * add update-grub to postinst
+
+ -- Torsten Wohlfarth <towo@siduction.org>  Wed, 15 Dec 2021 14:30:14 +0100
+
+wintersky-common-settings (2021.2.99-4) unstable; urgency=medium
+
+  * remuve the flavour from grub after installing
+
+ -- Torsten Wohlfarth <towo@siduction.org>  Tue, 14 Dec 2021 10:04:55 +0100
+
 wintersky-common-settings (2021.2.99-3) unstable; urgency=medium
 
   * set GRUB_DISABLE_OS_PROBER=false

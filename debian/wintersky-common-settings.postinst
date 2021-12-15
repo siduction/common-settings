@@ -7,6 +7,10 @@ set -e
 case "$1" in
     configure)
         cp -af /usr/share/wintersky-common-settings/etc/* /etc
+	if [ -e /boot/grub/grub.cfg ] && which update-grub2 >/dev/null 2>&1
+	then
+	    update-grub
+	fi
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
