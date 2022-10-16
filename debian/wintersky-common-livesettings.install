@@ -1,7 +1,7 @@
-sbin/*              sbin/
 livesettings        usr/bin/
 user-home-settings  usr/share/wintersky-common-livesettings
 all-users-settings  usr/share/wintersky-common-livesettings
 common-cheatcodes   usr/share/wintersky-common-livesettings
 live/etc/*          etc/
+live/sbin/*         sbin/
 
