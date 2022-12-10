@@ -1,0 +1,7 @@
+livesettings        usr/bin/
+user-home-settings  usr/share/mow-common-livesettings
+all-users-settings  usr/share/mow-common-livesettings
+common-cheatcodes   usr/share/mow-common-livesettings
+live/etc/*          etc/
+live/sbin/*         sbin/
+
