@@ -1,0 +1,11 @@
+[Unit]
+Description=Common cheatcodes in live media
+ConditionPathExists=/usr/share/mow-common-livesettings/
+After=sysinit.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/share/mow-common-livesettings/common-cheatcodes start
+
+[Install]
+WantedBy=basic.target
