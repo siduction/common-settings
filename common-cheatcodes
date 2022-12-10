@@ -88,6 +88,94 @@ echo "Release Notes scheduled for start."
 fi
 }
 
+set_hidpi() {
+    RESOLUTION=$(fbset -s | awk -F '"' 'FNR == 2 {print $2}'| cut -c -4)
+    echo Resolution: $RESOLUTION > /tmp/livesettings.txt
+    if [ "$RESOLUTION" -ge 3440 ]; then
+for file in /home/${FLL_LIVE_USER}/.config/kdeglobals /etc/skel/.config/kdeglobals
+do
+cat <<'EOF' > "$file"
+[KScreen]
+ScaleFactor=2
+ScreenScaleFactors=-1eDP-1=2;HDMI-1=2;DP-1=2;HDMI-2=2;DP-2=2;HDMI-3=2;DP-3=2;HDMI-4=2;DP-4=2;Virtual-1=2;
+EOF
+done
+
+for file in /home/${FLL_LIVE_USER}/.config/kcmfonts /etc/skel/.config/kcmfonts
+do
+cat <<'EOF' > "$file"
+[General]
+forceFontDPI=192
+EOF
+done
+
+for file in /home/${FLL_LIVE_USER}/.config/kcminputrc /etc/skel/.config/kcminputrc
+do
+cat <<'EOF' > "$file"
+[Mouse]
+cursorSize=48
+EOF
+done
+
+cat <<'EOF' >> /etc/sddm.conf.d/kde_settings.conf
+
+[X11]
+EnableHiDPI=true
+ServerArguments=-dpi 192
+EOF
+    else
+        if [ "$RESOLUTION" -ge 2040 ]; then
+for file in /home/${FLL_LIVE_USER}/.config/kdeglobals /etc/skel/.config/kdeglobals
+do
+cat <<'EOF' > "$file"
+[KScreen]
+ScaleFactor=1.5
+ScreenScaleFactors=eDP-1=1.5;HDMI-1=1.5;DP-1=1.5;HDMI-2=1.5;DP-2=1.5;HDMI-3=2;DP-3=1.5;HDMI-4=1.5;DP-4=1.5;Virtual-1=1.5;
+EOF
+done
+
+for file in /home/${FLL_LIVE_USER}/.config/kcmfonts /etc/skel/.config/kcmfonts
+do
+cat <<'EOF' > "$file"
+[General]
+forceFontDPI=144
+EOF
+done
+
+for file in /home/${FLL_LIVE_USER}/.config/kcminputrc /etc/skel/.config/kcminputrc
+do
+cat <<'EOF' > "$file"
+[Mouse]
+cursorSize=36
+EOF
+done
+
+cat <<'EOF' >> /etc/sddm.conf.d/kde_settings.conf
+
+[X11]
+EnableHiDPI=true
+ServerArguments=-dpi 144
+EOF
+        else
+            echo kein HiDPI > /tmp/livesettings-2-txt
+        fi
+    fi
+    chown -R ${FLL_LIVE_USER}.${FLL_LIVE_USER} /home/${FLL_LIVE_USER}
+}
+
+hack_kde()
+{
+        if [ $LANG = "de_DE.UTF-8" ] || [ $LANG = "de_DE.utf8" ]; then
+            cat > /home/tux/.config/plasma-localerc <<EOF
+[Formats]
+LANG=de_DE.UTF-8
+
+[Translations]
+LANGUAGE=de:en_US
+EOF
+        fi
+}
+
 do_start()
 {
 if [ -z "${NOINTRO}" ]; then
@@ -98,6 +186,8 @@ fi
 case "${1}" in
     start)
         log_daemon_msg "${NAME}"
+	set_hidpi
+	hack_kde
         do_start
         log_end_msg "${?}"
         ;;
