@@ -1,3 +1,9 @@
+mow-common-settings (2022.1.1-1) unstable; urgency=medium
+
+  * prepare Masters of War release
+
+ -- Torsten Wohlfarth <towo@siduction.org>  Sat, 10 Dec 2022 17:09:08 +0100
+
 wintersky-common-settings (2022.1.0-3) unstable; urgency=medium
 
   * add snapper-gui policy for polkit-1
