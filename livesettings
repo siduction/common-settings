@@ -55,6 +55,7 @@ setup_calamares() {
     mkdir -p /home/${FLL_LIVE_USER}/Desktop
     if [ -e /usr/share/applications/calamares.desktop ]; then
         cp -f /usr/share/applications/calamares.desktop /home/${FLL_LIVE_USER}/Desktop
+	sed -i 's/pkexec calamares/sudo -E calamares/' /home/${FLL_LIVE_USER}/Desktop/calamares.desktop
         chmod +x /home/${FLL_LIVE_USER}/Desktop/calamares.desktop
     fi
 }

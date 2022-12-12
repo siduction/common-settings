@@ -1,3 +1,9 @@
+mow-common-settings (2022.1.1-5) unstable; urgency=medium
+
+  * hack calamares start
+
+ -- Torsten Wohlfarth <towo@siduction.org>  Mon, 12 Dec 2022 19:48:05 +0100
+
 mow-common-settings (2022.1.1-4) unstable; urgency=medium
 
   * fix typo in install script
