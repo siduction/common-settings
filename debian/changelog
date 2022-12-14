@@ -1,3 +1,9 @@
+mow-common-settings (2022.1.1-8) unstable; urgency=medium
+
+  * fix typo
+
+ -- Torsten Wohlfarth <towo@siduction.org>  Wed, 14 Dec 2022 22:02:04 +0100
+
 mow-common-settings (2022.1.1-7) unstable; urgency=medium
 
   * fix typo
