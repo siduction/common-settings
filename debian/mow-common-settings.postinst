@@ -11,7 +11,7 @@ case "$1" in
 	then
 	    update-grub
 	fi
-	if ! -f [ /usr/lib/x86_64-linux-gnu/libnssutil3.so ], then
+	if [ ! -f /usr/lib/x86_64-linux-gnu/libnssutil3.so ], then
 	    ln -s /usr/lib/x86_64-linux-gnu/lib{nssutil3,nss3,smime3,ssl3}.so /usr/lib/firefox/
 	fi
     ;;
