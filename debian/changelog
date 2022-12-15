@@ -1,3 +1,9 @@
+mow-common-settings (2022.1.1-9) unstable; urgency=medium
+
+  * try to fix the user-dirs problem
+
+ -- Torsten Wohlfarth <towo@siduction.org>  Thu, 15 Dec 2022 11:08:53 +0100
+
 mow-common-settings (2022.1.1-8) unstable; urgency=medium
 
   * fix typo

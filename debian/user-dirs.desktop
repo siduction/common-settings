@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Generate User Dirs
+GenericName=Generate User Dirs
+Keywords=calamares;system;installer;
+Exec=bash -c "xdg-user-dirs-update && rm -f /home/tux/.config/autostart/user-dirs.desktop"
+Comment=fix user dirs
+Icon=/usr/share/tuxedo/tux.png
+Terminal=false
+StartupNotify=true
+Categories=Qt;System;
+X-AppStream-Ignore=true
