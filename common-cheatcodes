@@ -174,7 +174,9 @@ LANG=de_DE.UTF-8
 LANGUAGE=de:en_US
 EOF
         fi
+	mkdir -p /home/${FLL_LIVE_USER}/.config/autostart/
 	cp -a /usr/share/siduction/user-dirs.desktop /home/${FLL_LIVE_USER}/.config/autostart/
+	chown -R ${FLL_LIVE_USER}.${FLL_LIVE_USER} /home/${FLL_LIVE_USER}
 }
 
 do_start()
