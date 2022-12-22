@@ -2,7 +2,7 @@
 Categories=System;
 Comment[de_DE]=In installiertes System chrooten
 Comment=login into installed system with chroot
-Exec=sudo -E /usr/share/siduction/chroot-helper
+Exec=sudo /usr/share/siduction/chroot-helper
 GenericName[de_DE]=
 GenericName=
 Icon=/usr/share/siduction/icons/chroot.svg
