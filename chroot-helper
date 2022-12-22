@@ -141,7 +141,14 @@ if [ "$(lsblk -lf -o NAME,FSTYPE | grep $device2 | grep LUKS)" 2>/dev/null ]; th
 		for i in /dev /dev/pts /proc /sys /sys/firmware/efi/efivars /run; do  mount -B $i /mnt$i; done
 		echo $text4
 		hostname $(cat /mnt/etc/hostname)
-		chroot /mnt /bin/sh -c "mount -a && /bin/bash"
+		if [ -L /mnt/etc/resolv.conf ]; then
+		    mv /mnt/etc/resolv.conf /mnt/etc/resolv.conf.bak && cp -a /etc/resolv.conf /mnt/etc/resolv.conf
+		    chroot /mnt /bin/sh -c "mount -a && /bin/bash"
+		    rm -f /mnt/etc/resolv.conf
+		    mv /mnt/etc/resolv.conf.bak /mnt/etc/resolv.conf
+		else
+		    chroot /mnt /bin/sh -c "mount -a && /bin/bash"
+		fi
 		hostname $(cat /etc/hostname)
 		umount -R /mnt 2> /dev/null
 		umount -R /mnt/* 2> /dev/null
@@ -221,7 +228,14 @@ if [ "$(lsblk -lf -o NAME,FSTYPE | grep $device2 | grep LUKS)" 2>/dev/null ]; th
 	    echo $text4
 	    echo $text5
 	    hostname $(cat /mnt/etc/hostname)
-	    chroot /mnt /bin/sh -c "mount -a && /bin/bash"
+	    if [ -L /mnt/etc/resolv.conf ]; then
+		mv /mnt/etc/resolv.conf /mnt/etc/resolv.conf.bak && cp -a /etc/resolv.conf /mnt/etc/resolv.conf
+		chroot /mnt /bin/sh -c "mount -a && /bin/bash"
+		rm -f /mnt/etc/resolv.conf
+		mv /mnt/etc/resolv.conf.bak /mnt/etc/resolv.conf
+	    else
+		chroot /mnt /bin/sh -c "mount -a && /bin/bash"
+	    fi
 	    hostname $(cat /etc/hostname)
 	    umount -R /mnt 2> /dev/null
 	fi
@@ -293,9 +307,15 @@ else
     for i in /dev /dev/pts /proc /sys /sys/firmware/efi/efivars /run; do  mount -B $i /mnt$i; done
     echo $text4
     echo $text5
-    prompt=$(echo $PS1)
     hostname $(cat /mnt/etc/hostname)
-    chroot /mnt /bin/sh -c "mount -a && /bin/bash"
+    if [ -L /mnt/etc/resolv.conf ]; then
+	mv /mnt/etc/resolv.conf /mnt/etc/resolv.conf.bak && cp -a /etc/resolv.conf /mnt/etc/resolv.conf
+	chroot /mnt /bin/sh -c "mount -a && /bin/bash"
+	rm -f /mnt/etc/resolv.conf
+	mv /mnt/etc/resolv.conf.bak /mnt/etc/resolv.conf
+    else
+	chroot /mnt /bin/sh -c "mount -a && /bin/bash"
+    fi
     hostname $(cat /etc/hostname)
     umount -R /mnt 2>/dev/null
     umount -R /mnt/* 2>/dev/null
