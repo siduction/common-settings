@@ -58,6 +58,10 @@ setup_calamares() {
 	sed -i 's/pkexec calamares/sudo -E calamares/' /home/${FLL_LIVE_USER}/Desktop/calamares.desktop
         chmod +x /home/${FLL_LIVE_USER}/Desktop/calamares.desktop
     fi
+    if [ -e /usr/share/siduction/chroot-helper.desktop ]; then
+	cp -f /usr/share/siduction/chroot-helper.desktop /home/${FLL_LIVE_USER}/Desktop
+	chmod +x /home/${FLL_LIVE_USER}/Desktop/chroot-helper.desktop
+    fi
 }
 
 chown_user_dir() {

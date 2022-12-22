@@ -1,0 +1,21 @@
+[Desktop Entry]
+Categories=System;
+Comment[de_DE]=In installiertes System chrooten
+Comment=login into installed system with chroot
+Exec=/usr/bin/konsole -e sudo /usr/share/siduction/chroot-helper
+GenericName[de_DE]=
+GenericName=
+Icon=/usr/share/siduction/icons/chroot.svg
+MimeType=
+Name[de_DE]=siduction Chroot Helfer
+Name=siduction chroot helper
+Path=
+StartupNotify=true
+Terminal=false
+Type=Application
+Version=1.0
+X-AppStream-Ignore=true
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

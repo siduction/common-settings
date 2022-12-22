@@ -1,0 +1,257 @@
+#!/bin/bash
+device=""
+spart=""
+cpart=""
+bpart=""
+epart=""
+drivelist=""
+disklist=""
+
+rm -f /tmp/disk* 2> /dev/null
+rm -f /tmp/drive* 2> /dev/null
+rm -f /tmp/part* 2> /dev/null
+rm -f /tmp/device 2> /dev/null
+rm -f /tmp/cpar* 2> /dev/null
+rm -f /tmp/syspar* 2> /dev/null
+
+lang=$(echo $LANG | awk -F\_ '{print $1}')
+case $lang in
+	de)
+	    title1="Laufwerke"
+	    title2="siduction Chroot Helfer"
+	    title3="Linux Installation Betreten"
+	    text1="Sorry, keine Platte ausgewählt, beende."
+	    text2="Gewählte Disk:"
+	    text3="Aufgeschlossen"
+	    text4="Betrete installiertes System"
+	    text5="Verlassen Sie das Chroot mittels 'exit' oder Ctrl+d"
+	    text6="Nicht verschlüsselt"
+	    text7="Wählen Sie die Festplatte, welche untersucht werden soll."
+	    text8="Es wurde eine <b>siduction Installation</b> gefunden.<br>Mit einem Klick auf <font color=red><b>&nbsp;Ja&nbsp;<b></font> wechseln Sie in das installierte System als Root!<br><font color=red><b>Achtung,</b> alles was sie nun machen, findet im installierten System statt und ist potentiell gefährlich!</font>"
+	    text9="Mehrere Linux Installationen gefunden\n\nWählen Sie eine Partition für chroot"
+	    text10="Sorry, keine Partition ausgewählt, beende."
+	    text11="Es wurde eine <b>Linux Installation</b> gefunden.<br>Mit einem Klick auf <font color=red><b>&nbsp;Ja&nbsp;</b></font> wechseln Sie in das installierte System als Root!<br><font color=red><b>Achtung,</b> alles was sie nun machen, findet in dem installierten System statt und ist potentiell gefährlich!</font>"
+	    text12="Es wurde eine <b>LUKS1 verschlüsselte Installation</b> gefunden.<br><br>Mit einem Klick auf <font color=red><b>&nbsp;Ja&nbsp;</b></font> und der Eingabe ihres LUKS Passwortes im nächsten Dialog<br> wechseln Sie in das installierte System als Root!<br><br><font color=red><b>Achtung,</b> alles was sie nun machen, findet im installierten System statt und ist potentiell gefährlich!</font>"
+	    text13="Es wurde eine <b>LUKS2 verschlüsselte Installation</b> gefunden.<br><br>Mit einem Klick auf <font color=red><b>&nbsp;Ja&nbsp;</b></font> und der Eingabe ihres LUKS Passwortes im nächsten Dialog<br> wechseln Sie in das installierte System als Root!<br><br><font color=red><b>Achtung,</b> alles was sie nun machen, findet im installierten System statt und ist potentiell gefährlich!</font>"
+	    text14="Kein Linux System gefunden, beende."
+	    textcr="LUKS Verschlüsselungspasswort eingeben"
+	    ;;
+	*)
+	    title1="Devices"
+	    title2="siduction chroot helper"
+	    text1="Sorry, no disk choosen, exiting."
+	    text2="Choosen disc:"
+	    text3="Decrypted"
+	    text4="Enter installed system"
+	    text5="Exit the chroot using 'exit' or Ctrl+d"
+	    text6="Not crypted"
+	    text7="Select the hard disk to be examined."
+	    text8="A <b>siduction installation</b> was found.<br><br>Click on <font color=red>&nbsp;Yes&nbsp;</font> to switch to the installed system as root!<br><br><Font color=red><b>Attention!</b> Everything you do now takes place in the installed system and is potentially dangerous.</font>"
+	    text9="Multiple linux installations found.\n\nChoose one partition for chroot"
+	    text10"Sorry, no partition choosen. Exiting."
+	    text11="A <b>LINUX installation</b> was found.<br><br><b>Click on <font color=red>&nbsp;Yes&nbsp;</font> to switch to the installed system as root!<br><br><font color=red><b>Attention!</b> Everything you do now takes place in the installed system and is potentially dangerous.</font>"
+	    text12="A <b>LUKS1 encrypted installation</b> was found.<br><br>Click on <font color=red>&nbsp;Yes&nbsp;</font> and type in your LUKS passphrase in the next dialog<br>to switch to the installed system as root!<br><br><font color=red><b>Attention!</b> Everything you do now takes place in the installed system and is potentially dangerous.</font>"
+	    text13="A <b>LUKS2 encrypted installation</b> was found.<br><br>Click on <font color=red>&nbsp;Yes&nbsp;</font> and type in your LUKS passphrase in the next dialog<br>to switch to the installed system as root!<br><br><font color=red><b>Attention!</b> Everything you do now takes place in the installed system and is potentially dangerous.</font>"
+	    text14="No linux system found, exiting."
+	    textcr="input LUKS passphrase"
+	    ;;
+esac
+rm -f /tmp/disk_* 2> /dev/null
+rm -f /tmp/disklist.txt 2> /dev/null
+rm -f /tmp/device 2> /dev/null
+lsblk | awk '/disk/{ print $1 }' | sort >/tmp/disklist2
+for m in $(lsblk -lf -o Name,TYPE,FSTYPE | grep -E "ext|btrfs|xfs|LUKS" | awk '{ print $1 }' | egrep "sd|hd|vd" | cut -c1-3 | sort | uniq); do sed -i "/\<$m\>/d" /tmp/disklist2; done
+for n in $(lsblk -lf -o Name,TYPE,FSTYPE | grep -E "ext|btrfs|xfs|LUKS" | awk '{ print $1 }' | grep nvme | cut -c1-7 | sort | uniq); do sed -i "/\<$n\>/d" /tmp/disklist2; done
+for e in $(lsblk -lf -o Name,TYPE,SUBSYSTEMS | grep usb | awk '/disk/{ print $1 }'| sort | uniq); do sed -i "/\<$e\>/d" /tmp/disklist2; done
+blacklist=$(cat /tmp/disklist2)
+for x in $(lsblk -dnl -o NAME,RM | grep -E -v " 1|loop" | awk '{print $1}'); do lsblk -lfo NAME,FSTYPE | grep $x > /tmp/disk_$x.txt; done
+for liste in /tmp/disk_*; do cat $liste >> /tmp/disklist.txt; done
+if [ $blacklist ]; then
+    for i in $(lsblk -dn -o NAME,TYPE,SUBSYSTEMS | grep -E -iv "loop|rom|usb|$blacklist" | awk '{print$1}'); do
+	z=$(lsblk -dn -o NAME,Size | grep $i | awk '{print $2}')
+	echo -e  \"$z'\t'$i\" \"'   \t'$(cat /sys/block/$i/device/model | sed 's/*_//')\"
+    done 1> /tmp/device1 2> /dev/null
+else
+    for i in $(lsblk -dn -o NAME,TYPE,SUBSYSTEMS | grep -E -iv "loop|rom|usb" | awk '{print$1}'); do
+        z=$(lsblk -dn -o NAME,Size | grep $i | awk '{print $2}')
+	echo -e  \"$z'\t'$i\" \"'   \t'$(cat /sys/block/$i/device/model | sed 's/*_//')\"
+    done 1> /tmp/device1 2> /dev/null
+fi
+cat /tmp/device1 | sort 1> /tmp/device 2> /dev/null
+if [ "$(cat /tmp/device | wc -l)" -ge 2 ]; then
+    device=$(dialog --colors --title "\Z1$title2" --menu "\n$text7\n\n" 10 63 0 --file "/tmp/device" 2>&1 >/dev/tty | awk '{print$2}')
+    clear
+else
+    device=$(cat /tmp/device | awk '{print $2}' | sed 's/\"//')
+fi
+if [ -z "$device" ]; then
+  kdialog --sorry "<p><h3>$text1</h3></p>" 2> /dev/null
+  echo $device
+  exit
+fi
+echo $text2 $device
+#exit
+if [ "$(lsblk -lf -o NAME,FSTYPE | grep $device | grep LUKS)" 2>/dev/null ]; then
+    if  [ "$(cryptsetup luksDump /dev/$(lsblk -lf -o NAME,FSTYPE | grep $device | grep LUKS | awk '{print $1}') | awk '/Version/{print $2}')" = 1 ]; then
+	if kdialog --warningyesno "<p><font size=4>$text12</font>&nbsp;&nbsp;&nbsp;</p>" 2> /dev/null; then
+	    cpart=$(lsblk -lf -o NAME,FSTYPE | grep $device | grep LUKS | awk '{print$1}')
+	    real_cr=luks\-$(lsblk -fl | grep $device | awk '/LUKS/{print $4}')
+	    CPASS=$(kdialog --password "<p><font size=4>&emsp;$textcr</font></p>" 2> /dev/null)
+	    if [ -z ${CPASS} ]; then
+		exit 1
+	    fi
+	    printf '%s\n' ${CPASS} | cryptsetup luksOpen -q /dev/$cpart $real_cr
+	    echo $text3
+	    if [ "$(blkid | grep $real_cr | grep btrfs)" 2>/dev/null ]; then
+		mount -o subvol=@ /dev/mapper/$real_cr /mnt
+	    else
+		mount /dev/mapper/$real_cr /mnt
+	    fi
+	    if [ "$(grep boot /mnt/etc/fstab | grep -v efi)" ]; then
+		bpart="$(blkid | grep $(grep boot /mnt/etc/fstab | grep -v efi | awk '{print $1}' | awk -F\= '{print $2}') | awk '{print $1}' | awk -F\: '{print $1}')"
+	    fi
+	    epart=$(blkid | grep $(grep efi /mnt/etc/fstab | awk '{print $1}' | awk -F\= '{print $2}') | awk '{print $1}' | awk -F\: '{print $1}')
+	    if [ "$bpart" ]; then
+		mount $bpart /mnt/boot
+	    fi
+	    if [ "$epart" ]; then
+		mount $epart /mnt/boot/efi
+	    fi
+	    for i in /dev /dev/pts /proc /sys /sys/firmware/efi/efivars /run; do  mount -B $i /mnt$i; done
+	    echo $text4
+	    hostname $(cat /mnt/etc/hostname)
+	    chroot /mnt /bin/sh -c "mount -a && /bin/bash"
+	    hostname $(cat /etc/hostname)
+	    umount -R /mnt 2> /dev/null
+	    umount -R /mnt/* 2> /dev/null
+	    for c in $( dmsetup info -c | awk '/LUKS/{ print $1 }'); do cryptsetup luksClose $c; done 2> /dev/null
+	else
+	    umount -R /mnt/* 2> /dev/null
+	    umount -R /mnt 2> /dev/null 
+	    exit 0
+	fi
+    else
+	if kdialog --warningyesno "<p><font size=4>$text13</font>&nbsp;&nbsp;&nbsp;</p>" 2> /dev/null; then
+	    lsblk -lf -o NAME,FSTYPE,FSVER | grep $device | grep LUKS | grep " 2" | awk '{print $1}' | sort 1> /tmp/cpart1 2> /dev/null
+	    if [ "$(cat /tmp/cpart1 | wc -l)" -ge 2 ]; then
+		cpart=$(dialog --no-lines --colors --title "\Z1$title2" --menu "\n$text9\n\n" 10 63 0 --file /tmp/cpart1 2>&1 >/dev/tty)
+		clear
+	    else
+		cpart=$(cat /tmp/cpart1)
+	    fi
+	    if [ -z "$cpart" ]; then
+		kdialog --sorry "<p><font size=4>$text10</p></font>" 2> /dev/null
+		exit 1
+	    fi
+	    #cpart=$(lsblk -lf -o NAME,FSTYPE,FSVER | grep $device | grep LUKS | awk '{print $1}')
+	    echo "cpart" $cpart
+	    CPASS=$(kdialog --password "<p><font size=4>&emsp;$textcr</font></p>" 2> /dev/null)
+	    if [ -z ${CPASS} ]; then
+		exit 1
+	    fi
+	    printf '%s\n' ${CPASS} | cryptsetup -q luksOpen /dev/$cpart cryptdev_$cpart
+	    echo $text3
+	    mkdir  -p /mnt/$cpart
+	    for z in $( vgscan | awk -F\" '{ print $2 }'); do vgchange -ay $z; done
+	    spart=$(blkid -c /dev/null | grep mapper | grep -E "ext|btrfs|xfs" | awk '{print $1}' | awk -F\: '{print $1}')
+	    mount $spart /mnt/$cpart
+	    if [ "$(blkid | grep $spart | grep btrfs | awk '{print $1}' | awk -F\: '{print $1}')" 2>/dev/null ]; then
+		cdev=$(awk '/luks/{print $1}' /mnt/$cpart/@/etc/crypttab)
+	    else
+		cdev=$(awk '/luks/{print $1}' /mnt/$cpart/etc/crypttab)
+	    fi
+	    echo "spart" $spart
+	    echo "cdev" $cdev
+	    umount -R /mnt/* 2>/dev/null
+	    for z in $( vgscan | awk -F\" '{ print $2 }'); do vgchange -a n $z; done
+	    for c in $( dmsetup info -c | awk '/LUKS/{ print $1 }'); do cryptsetup luksClose $c; done
+	    printf '%s\n' ${CPASS} | cryptsetup luksOpen -q /dev/$cpart  $cdev
+	    for z in $( vgscan | awk -F\" '{ print $2 }'); do vgchange -ay $z; done
+	    syspart=$(blkid | grep mapper | grep -E "ext|btrf|xfs" | awk '{print $1}' | awk -F\: '{print $1}')
+	    echo "syspart" $syspart
+		if [ "$(blkid | grep mapper | grep btrfs)" 2>/dev/null ]; then
+		    mount $syspart -o subvol=@ /mnt
+		else
+		    mount $syspart /mnt
+		fi
+	    bpart=$(blkid | grep $(grep boot /mnt/etc/fstab | grep -v efi | awk '{print $1}' | awk -F\= '{print $2}') | awk '{print $1}' | awk -F\: '{print $1}')
+	    epart=$(blkid | grep $(grep efi /mnt/etc/fstab | awk '{print $1}' | awk -F\= '{print $2}') | awk '{print $1}' | awk -F\: '{print $1}')
+	    echo "Boot Partition:" $bpart
+	    echo "EFI Partition:" $epart
+	    if [ "$bpart" ]; then
+		mount $bpart /mnt/boot
+	    fi
+	    if [ "$epart" ]; then
+		mount $epart /mnt/boot/efi
+	    fi
+	    for i in /dev /dev/pts /proc /sys /sys/firmware/efi/efivars /run; do  mount -B $i /mnt$i; done
+	    echo $text4
+	    echo $text5
+	    hostname $(cat /mnt/etc/hostname)
+	    chroot /mnt /bin/sh -c "mount -a && /bin/bash"
+	    hostname $(cat /etc/hostname)
+	    umount -R /mnt 2> /dev/null
+	fi
+	for z in $( vgscan | awk -F\" '{ print $2 }'); do vgchange -a n $z; done 2> /dev/null
+	for c in $( dmsetup info -c | awk '/LUKS/{ print $1 }'); do cryptsetup luksClose $c; done 2> /dev/null
+    fi
+else 
+    echo $text6
+    for i in $(blkid | grep -E "ext|btrf|xfs" | grep -v "ntfs" | awk '{print $1}' | grep $device | awk -F\: '{print $1}' | awk -F\/ '{print $3}')
+	do
+	mkdir /mnt/$i 2>/dev/null
+	mount /dev/$i /mnt/$i
+	done
+    find /mnt -name fstab | grep -v share | awk -F\/ '{print $3}' | sort 1> /tmp/syspart1 2> /dev/null
+    for p in $(cat /tmp/syspart1); do
+	lsblk -lf -o NAME,SIZE | grep $p
+    done 1> /tmp/partlist 2> /dev/null
+    if [ "$(cat /tmp/syspart1 | wc -l)" -ge 2 ]; then
+	syspart=$(dialog --colors --title "\Z1$title2" --menu "\n$text9\n\n" 10 63 0 --file "/tmp/partlist" 2>&1 >/dev/tty)
+	clear
+	if [ -z "$syspart" ]; then
+	    kdialog --sorry "<p><font size=4>$text10</p></font>" 2> /dev/null
+	    umount -R /mnt/* 2> /dev/null
+	    exit 1
+	fi
+    else
+	syspart=$(find /mnt -name fstab | grep -v share | awk -F\/ '{print $3}')
+    fi
+    if [ -z $syspart ]; then
+	kdialog --sorry "<p><font size=4>$text14</p></font>" 2> /dev/null
+	umount -R /mnt/* 2> /dev/null
+	exit 1
+    fi
+    umount -R /mnt/* 2>/dev/null
+    if [ "$(blkid | grep $syspart | grep btrfs)" 2>/dev/null ]; then
+	mount /dev/$syspart -o subvol=@ /mnt
+    else
+	mount /dev/$syspart /mnt
+    fi
+    kdialog --warningyesno "<p><font size=4>$text11</font></p>" 2> /dev/null
+    if [ $? != 0 ]; then
+	umount -R /mnt/* 2> /dev/null
+	umount -R /mnt 2> /dev/null
+	echo "Abbruch"
+	exit 0
+    fi
+    if [ "$(grep boot /mnt/etc/fstab | grep -v efi)" ]; then
+	bpart="$(blkid | grep $(grep boot /mnt/etc/fstab | grep -v efi | awk '{print $1}' | awk -F\= '{print $2}') | awk '{print $1}' | awk -F\: '{print $1}')"
+    fi
+    epart=$(blkid | grep $(grep efi /mnt/etc/fstab | awk '{print $1}' | awk -F\= '{print $2}') | awk '{print $1}' | awk -F\: '{print $1}')
+    if [ "$bpart" ]; then
+        mount $bpart /mnt/boot
+    fi
+    if [ "$epart" ]; then
+        mount $epart /mnt/boot/efi
+    fi
+    for i in /dev /dev/pts /proc /sys /sys/firmware/efi/efivars /run; do  mount -B $i /mnt$i; done
+    echo $text4
+    echo $text5
+    prompt=$(echo $PS1)
+    hostname $(cat /mnt/etc/hostname)
+    chroot /mnt /bin/sh -c "mount -a && /bin/bash"
+    hostname $(cat /etc/hostname)
+    umount -R /mnt 2>/dev/null
+    umount -R /mnt/* 2>/dev/null
+fi
