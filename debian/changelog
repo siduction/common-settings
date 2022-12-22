@@ -1,3 +1,9 @@
+mow-common-settings (2022.1.1-15) unstable; urgency=medium
+
+  * hopefully fix calamares icon
+
+ -- Torsten Wohlfarth <towo@siduction.org>  Thu, 22 Dec 2022 12:46:46 +0100
+
 mow-common-settings (2022.1.1-14) unstable; urgency=medium
 
   * add chroot-helper

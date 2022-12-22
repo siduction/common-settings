@@ -53,9 +53,10 @@ hack_bashrc() {
 
 setup_calamares() {
     mkdir -p /home/${FLL_LIVE_USER}/Desktop
-    if [ -e /usr/share/applications/calamares.desktop ]; then
-        cp -f /usr/share/applications/calamares.desktop /home/${FLL_LIVE_USER}/Desktop
-	sed -i 's/pkexec calamares/sudo -E calamares/' /home/${FLL_LIVE_USER}/Desktop/calamares.desktop
+    if [ -e /usr/share/siduction/calamares.desktop ]; then
+        cp -f /usr/share/siduction/calamares.desktop /home/${FLL_LIVE_USER}/Desktop
+	cp -f /usr/share/siduction/calamares.desktop /usr/share/applications/
+	#sed -i 's/pkexec calamares/sudo -E calamares/' /home/${FLL_LIVE_USER}/Desktop/calamares.desktop
         chmod +x /home/${FLL_LIVE_USER}/Desktop/calamares.desktop
     fi
     if [ -e /usr/share/siduction/chroot-helper.desktop ]; then
