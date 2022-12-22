@@ -34,6 +34,7 @@ Depends: ${misc:Depends},
          gnome-icon-theme,
          gnome-icon-theme-symbolic,
          mow-live-grub-theme,
-         mow-common-settings
+         mow-common-settings,
+         zenity
 Description: Common settings (live mode)
  Common settings for live mode.
