@@ -249,7 +249,7 @@ else
 	mkdir /mnt/$i 2>/dev/null
 	mount /dev/$i /mnt/$i
 	done
-    find /mnt -name fstab | grep -v share | awk -F\/ '{print $3}' | sort 1> /tmp/syspart1 2> /dev/null
+    find /mnt -name fstab | grep -E -v "share|snapshot" | awk -F\/ '{print $3}' | sort 1> /tmp/syspart1 2> /dev/null
     for p in $(cat /tmp/syspart1); do
 	lsblk -lf -o NAME,SIZE | grep $p
     done 1> /tmp/partlist 2> /dev/null
@@ -266,7 +266,7 @@ else
 	    exit 1
 	fi
     else
-	syspart=$(find /mnt -name fstab | grep -v share | awk -F\/ '{print $3}')
+	syspart=$(find /mnt -name fstab | grep -E -v "share|snapshot" | awk -F\/ '{print $3}')
     fi
     if [ -z $syspart ]; then
 	if [ $(ps -ef | awk '/[k]win/{print $8}' | grep -m1 win) ]; then

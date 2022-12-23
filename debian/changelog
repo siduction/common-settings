@@ -1,3 +1,9 @@
+mow-common-settings (2022.1.1-20) unstable; urgency=medium
+
+  * fix chroot-helper
+
+ -- Torsten Wohlfarth <towo@siduction.org>  Fri, 23 Dec 2022 11:15:20 +0100
+
 mow-common-settings (2022.1.1-19) unstable; urgency=medium
 
   * fix chroot-helper resolve
