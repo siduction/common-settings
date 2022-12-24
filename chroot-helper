@@ -249,7 +249,7 @@ else
 	mkdir /mnt/$i 2>/dev/null
 	mount /dev/$i /mnt/$i
 	done
-    find /mnt -name fstab | grep -E -v "share|snapshot" | awk -F\/ '{print $3}' | sort 1> /tmp/syspart1 2> /dev/null
+    find /mnt -name fstab | grep -E -v "share|snapshot|overlay" | awk -F\/ '{print $3}' | sort 1> /tmp/syspart1 2> /dev/null
     for p in $(cat /tmp/syspart1); do
 	lsblk -lf -o NAME,SIZE | grep $p
     done 1> /tmp/partlist 2> /dev/null

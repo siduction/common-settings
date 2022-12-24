@@ -1,3 +1,9 @@
+mow-common-settings (2022.1.1-21) unstable; urgency=medium
+
+  * fix syspart detection in chroot-helper
+
+ -- Torsten Wohlfarth <towo@siduction.org>  Sat, 24 Dec 2022 20:12:56 +0100
+
 mow-common-settings (2022.1.1-20) unstable; urgency=medium
 
   * fix chroot-helper
