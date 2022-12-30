@@ -1,3 +1,9 @@
+mow-common-settings (2022.1.1-22) unstable; urgency=medium
+
+  * add hook for nala.conf auto_remove = false
+
+ -- Torsten Wohlfarth <towo@siduction.org>  Fri, 30 Dec 2022 19:35:43 +0100
+
 mow-common-settings (2022.1.1-21) unstable; urgency=medium
 
   * fix syspart detection in chroot-helper

@@ -11,6 +11,9 @@ case "$1" in
 	then
 	    update-grub
 	fi
+	if [ -f /etc/nala/nala.conf ]; then
+	    sed -i 's/auto_remove = true/auto_remove = false/' /etc/nala/nala.conf
+	fi
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
