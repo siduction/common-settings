@@ -1,3 +1,9 @@
+mow-common-settings (2022.1.2-2) unstable; urgency=medium
+
+  * remove /etc/updatedb.conf
+
+ -- Torsten Wohlfarth <towo@siduction.org>  Sun, 02 Apr 2023 18:10:03 +0200
+
 mow-common-settings (2022.1.2-1) unstable; urgency=medium
 
   * remove snapper-rollback foo
