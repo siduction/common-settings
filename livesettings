@@ -9,8 +9,8 @@ fi
 
 all_users_common_settings() {
     # we run all users settings
-    if [ -f /usr/share/mow-common-livesettings/all-users-settings ] ;then
-        /usr/share/mow-common-livesettings/all-users-settings
+    if [ -f /usr/share/giants-common-livesettings/all-users-settings ] ;then
+        /usr/share/giants-common-livesettings/all-users-settings
     fi
 }
 
@@ -38,8 +38,8 @@ EOF
 }
 
 user_home_common_settings() {
-    if [ -f /usr/share/mow-common-livesettings/user-home-settings ] ;then
-        su "${FLL_LIVE_USER}" -c /usr/share/mow-common-livesettings/user-home-settings
+    if [ -f /usr/share/giants-common-livesettings/user-home-settings ] ;then
+        su "${FLL_LIVE_USER}" -c /usr/share/giants-common-livesettings/user-home-settings
     fi
 }
 

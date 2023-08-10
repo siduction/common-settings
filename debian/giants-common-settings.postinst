@@ -6,7 +6,7 @@ set -e
 
 case "$1" in
     configure)
-        cp -af /usr/share/mow-common-settings/etc/* /etc
+        cp -af /usr/share/giants-common-settings/etc/* /etc
 	if [ -e /boot/grub/grub.cfg ] && which update-grub2 >/dev/null 2>&1
 	then
 	    update-grub
