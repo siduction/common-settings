@@ -1,3 +1,15 @@
+giants-common-settings (2023.1-2) unstable; urgency=medium
+
+  * add 1600x900 to grub resolutions
+
+ -- Torsten Wohlfarth <towo@siduction.org>  Fri, 11 Aug 2023 13:24:15 +0200
+
+giants-common-settings (2023.1-1) unstable; urgency=medium
+
+  * prepare release
+
+ -- Torsten Wohlfarth <towo@siduction.org>  Thu, 10 Aug 2023 16:33:01 +0200
+
 mow-common-settings (2022.1.2-2) unstable; urgency=medium
 
   * remove /etc/updatedb.conf
