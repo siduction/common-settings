@@ -1,3 +1,9 @@
+giants-common-settings (2023.1-3) unstable; urgency=medium
+
+  * change chrot-helper.desktop
+
+ -- Torsten Wohlfarth <towo@siduction.org>  Fri, 11 Aug 2023 13:44:47 +0200
+
 giants-common-settings (2023.1-2) unstable; urgency=medium
 
   * add 1600x900 to grub resolutions
