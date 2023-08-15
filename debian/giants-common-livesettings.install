@@ -6,5 +6,6 @@ live/etc/*                        etc/
 live/sbin/*                       sbin/
 debian/user-dirs.desktop          usr/share/siduction/
 debian/chroot.svg                 usr/share/siduction/icons/
+debian/chroot.png                 usr/share/siduction/icons/
 debian/chroot-helper.desktop      usr/share/siduction/
 chroot-helper                     usr/share/siduction/
