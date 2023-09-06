@@ -1,3 +1,9 @@
+giants-common-settings (2023.2-1) unstable; urgency=medium
+
+  * rework chroot-helper
+
+ -- Torsten Wohlfarth <towo@siduction.org>  Wed, 06 Sep 2023 14:30:47 +0200
+
 giants-common-settings (2023.1-4) unstable; urgency=medium
 
   * add chroot png icon
