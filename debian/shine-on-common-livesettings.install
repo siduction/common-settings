@@ -1,7 +1,7 @@
 livesettings                      usr/bin/
-user-home-settings                usr/share/shine_on-common-livesettings
-all-users-settings                usr/share/shine_on-common-livesettings
-common-cheatcodes                 usr/share/shine_on-common-livesettings
+user-home-settings                usr/share/shine-on-common-livesettings
+all-users-settings                usr/share/shine-on-common-livesettings
+common-cheatcodes                 usr/share/shine-on-common-livesettings
 live/etc/*                        etc/
 live/sbin/*                       sbin/
 debian/user-dirs.desktop          usr/share/siduction/
