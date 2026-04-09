@@ -30,7 +30,8 @@ gen_adduser_conf() {
 }
 
 add_live_user() {
-    adduser --gecos ${FLL_LIVE_USER} ${FLL_LIVE_USER} \
+    rm -f /etc/skel/.face.icon
+    adduser --command ${FLL_LIVE_USER} ${FLL_LIVE_USER} \
 << EOF
 live
 live
@@ -48,7 +49,7 @@ hack_bashrc() {
     grep -s -q 'alias su' /home/${FLL_LIVE_USER}/.bashrc && return 0
     printf "\nalias su='sudo su'\n" \
         >> /home/${FLL_LIVE_USER}/.bashrc
-    chown ${FLL_LIVE_USER} /home/${FLL_LIVE_USER}/.bashrc
+    chown ${FLL_LIVE_USER}:${FLL_LIVE_USER} /home/${FLL_LIVE_USER}/.bashrc
 }
 
 setup_calamares() {
@@ -67,7 +68,8 @@ setup_calamares() {
 
 chown_user_dir() {
     # central point setting the ownership of users home
-    chown -R ${FLL_LIVE_USER} /home/${FLL_LIVE_USER}
+    ln -s /home/${FLL_LIVE_USER}/.face /home/${FLL_LIVE_USER}/.face.icon
+    chown -R ${FLL_LIVE_USER}:${FLL_LIVE_USER} /home/${FLL_LIVE_USER}
 }
 
 
