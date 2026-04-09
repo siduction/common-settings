@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+#DEBHELPER#
+
+case "$1" in
+	remove|purge)
+		rm -f /home/*/*/chroot-helper.desktop 2>/dev/null
+		;;
+	upgrade|failed-upgrade|disappear)
+		;;
+	abort-install|abort-upgrade)
+		;;
+	*)
+		echo "$0 called with unknown argument \`$1'" 1>&2
+		exit 1
+		;;
+esac
+
+exit 0
