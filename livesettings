@@ -30,12 +30,14 @@ gen_adduser_conf() {
 }
 
 add_live_user() {
-    rm -f /etc/skel/.face.icon
+    printf "generate live user\n\n"
     adduser --comment ${FLL_LIVE_USER} ${FLL_LIVE_USER} \
 << EOF
 live
 live
 EOF
+    printf "remove password from live user\n\n"
+    passwd -d ${FLL_LIVE_USER}
 }
 
 user_home_common_settings() {
@@ -68,7 +70,6 @@ setup_calamares() {
 
 chown_user_dir() {
     # central point setting the ownership of users home
-    ln -s /home/${FLL_LIVE_USER}/.face /home/${FLL_LIVE_USER}/.face.icon
     chown -R ${FLL_LIVE_USER}:${FLL_LIVE_USER} /home/${FLL_LIVE_USER}
 }
 
