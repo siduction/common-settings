@@ -1,3 +1,9 @@
+big-crime-common-settings (2026.1-2) unstable; urgency=medium
+
+  * fix chroot-helper.desktop
+
+ -- Torsten Wohlfarth <towo@siduction.org>  Fri, 15 May 2026 14:53:00 +0200
+
 big-crime-common-settings (2026.1-1) unstable; urgency=medium
 
   * New release
