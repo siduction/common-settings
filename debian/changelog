@@ -1,3 +1,9 @@
+gig-crime-common-settings (2026.0.0) unstable; urgency=medium
+
+  [ Axel Konrad ]
+  * livesettings: Set an eye-friendly color palette in .bashrc
+
+
 shine-on-common-settings (2024.1-4) unstable; urgency=medium
 
   * fix typo

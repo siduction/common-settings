@@ -50,6 +50,32 @@ hack_bashrc() {
     printf "\nalias su='sudo su'\n" \
         >> /home/${FLL_LIVE_USER}/.bashrc
     chown ${FLL_LIVE_USER}:${FLL_LIVE_USER} /home/${FLL_LIVE_USER}/.bashrc
+    
+    # Set eye-friendly color palette
+    for userbash in "/root/.bashrc" "/home/${FLL_LIVE_USER}/.bashrc"; do
+        cat <<-EOF >> ${userbash}
+        
+        # Eye-friendly color palette
+        echo -en "\e]P0181818" # black
+        echo -en "\e]P1A12525" # darkred
+        echo -en "\e]P24E9A06" # darkgreen
+        echo -en "\e]P3C4A000" # brown
+        echo -en "\e]P41A5AAA" # darkblue
+        echo -en "\e]P575507B" # darkmagenta
+        echo -en "\e]P606989A" # darkcyan
+        echo -en "\e]P7D3D7CF" # lightgrey
+        echo -en "\e]P8557533" # darkgrey
+        echo -en "\e]P9F03232" # red
+        echo -en "\e]PA8AE234" # green
+        echo -en "\e]PBFCE94F" # yellow
+        echo -en "\e]PC2B7DDD" # blue
+        echo -en "\e]PDAD7FA8" # magenta
+        echo -en "\e]PE34E2E2" # cyan
+        echo -en "\e]PFFFF7DD" # white
+        clear # new background
+        
+        EOF
+    done
 }
 
 setup_calamares() {
