@@ -369,9 +369,9 @@ do_work() {
 	echo "use 'ctrl + d' or type exit and [enter] to leave the chroot"
 	echo ""
 	if [ "$lang" = DE ]; then
-	    chroot $target/mnt /bin/sh -c "mount -a || true && loadkeys de && /bin/bash"
+	    chroot $target/mnt /bin/sh -c "mount -a || true && loadkeys de && mount -o remount -a || true && /bin/bash"
 	else
-	    chroot $target/mnt /bin/sh -c "mount -a || true && /bin/bash"
+	    chroot $target/mnt /bin/sh -c "mount -a || true && mount -o remount -a || true && /bin/bash"
 	fi
     hostname siduction
     rm -f /mnt/etc/resolv.conf
