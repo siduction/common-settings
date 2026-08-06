@@ -1,4 +1,10 @@
-gig-crime-common-settings (2026.0.0) unstable; urgency=medium
+big-crime-common-settings (2026.1.2) unstable; urgency=medium
+
+  [ Axel Konrad ]
+  * changelog: fix typo
+
+
+big-crime-common-settings (2026.1.1) unstable; urgency=medium
 
   [ Axel Konrad ]
   * livesettings: Set an eye-friendly color palette in .bashrc
